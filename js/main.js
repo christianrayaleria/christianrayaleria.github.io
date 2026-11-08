@@ -187,4 +187,4 @@ const io = new IntersectionObserver(
     }),
   { rootMargin: "-45% 0px -50% 0px" },
 );
-document.querySelectorAll("section[id]").forEach((s) => io.observe(s));
+document.querySelectorAll("#top, section[id]").forEach((s) => io.observe(s));
