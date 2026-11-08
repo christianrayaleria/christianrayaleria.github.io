@@ -341,11 +341,14 @@ h1 .w {
   display: inline-block;
   animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
+/* intro starts level with the editor's top edge */
+.hero-copy {
+  padding-top: 25px; /* height of the "data → logic → design → ship" label above the editor */
+}
 .lede {
   max-width: 42ch;
   font-size: clamp(18px, 2vw, 21px);
   line-height: 1.5;
-  margin-top: 8px;
   color: color-mix(in srgb, var(--fg) 86%, var(--bg));
   animation: rise 0.9s 0.4s both;
 }
@@ -775,6 +778,9 @@ h1 .w {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     padding-block: 48px 24px;
+  }
+  .hero-copy {
+    padding-top: 0;
   }
   .job,
   .approach,
