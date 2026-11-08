@@ -999,3 +999,17 @@ h1 .w {
     left: 12px;
   }
 }
+/* narrower screens: long code lines wrap under their own text instead of scrolling sideways */
+@media (max-width: 1100px) {
+  .code-body .l {
+    white-space: pre-wrap;
+    padding-left: 52px;
+    text-indent: -52px;
+  }
+}
+@media (max-width: 860px) {
+  .code-body .l {
+    padding-left: 38px;
+    text-indent: -38px;
+  }
+}
