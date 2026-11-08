@@ -46,29 +46,6 @@ This is the source for my personal portfolio: my experience, projects, education
     └── certs/          # Certificate images
 ```
 
-## Run it locally
-
-Open `index.html` in any browser. Nothing to install.
-
-## Updating the site
-
-| To change… | Edit |
-| --- | --- |
-| Projects or skills | the lists at the top of `js/main.js` |
-| Experience, education, certifications, leadership | `index.html` |
-| Colors or fonts | the tokens at the top of `css/style.css` |
-| Certificate images | add the file to `assets/certs/` and a card in `index.html` |
-
-Then publish:
-
-```bash
-git add .
-git commit -m "Describe what you changed"
-git push
-```
-
-GitHub Pages updates the live site within a minute or two.
-
 ## Contact
 
 - **Email:** christianrayaleria@gmail.com
