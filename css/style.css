@@ -10,8 +10,8 @@
   --soft: #11302d;
   --ok: #4ade80;
   --f-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
-  --f-body: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --f-mono: "Geist Mono", ui-monospace, Consolas, monospace;
+  --f-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
   color-scheme: dark;
 }
 :root[data-mode="light"] {
