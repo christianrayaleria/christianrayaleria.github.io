@@ -103,7 +103,7 @@ document.getElementById("skillGrid").innerHTML =
     .join("") +
   `<div class="card rv" style="grid-column:1/-1"><h3>Core</h3><div class="chips">${["Analytical thinking", "Adaptability", "Organized leadership", "Resourcefulness", "Communication"].map((s) => `<span>${s}</span>`).join("")}</div></div>`;
 
-// light / dark toggle (dark by default; remembered per viewer when storage works)
+// light / dark toggle (starts from the device setting; a click is remembered per viewer)
 const root = document.documentElement,
   modeBtn = document.getElementById("mode");
 function setMode(m) {
@@ -188,3 +188,12 @@ const io = new IntersectionObserver(
   { rootMargin: "-45% 0px -50% 0px" },
 );
 document.querySelectorAll("#top, section[id]").forEach((s) => io.observe(s));
+const contactLink = links.find((a) => a.getAttribute("href") === "#contact");
+addEventListener(
+  "scroll",
+  () => {
+    const atBottom = innerHeight + scrollY >= document.documentElement.scrollHeight - 4;
+    if (atBottom && Date.now() >= lockUntil) setActive(contactLink);
+  },
+  { passive: true },
+);

@@ -1,4 +1,5 @@
-/* Layout: Signal typography on Flow's structure: a one-line name hero, then section titles over card modules. Dark by default, viewer toggle to light. Dot grid behind, lit by the cursor. */
+/* Portfolio: one-line name hero with a code card, then section titles over card modules.
+   Follows the visitor's light/dark setting, with a toggle. Dot grid behind, lit near the cursor. */
 :root {
   --bg: #0c0f10;
   --panel: #121718;
@@ -8,7 +9,6 @@
   --dot: #283133;
   --accent: #3fc2b2;
   --soft: #11302d;
-  --ok: #4ade80;
   --f-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --f-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
@@ -21,9 +21,8 @@
   --mute: #5c6767;
   --line: #dfe5e4;
   --dot: #c9d3d1;
-  --accent: #0b7a6d;
+  --accent: #0a7468;
   --soft: #e0f1ee;
-  --ok: #15803d;
   color-scheme: light;
 }
 /* no choice saved yet: follow the device setting (applies before the script runs, so no flash) */
@@ -35,9 +34,8 @@
     --mute: #5c6767;
     --line: #dfe5e4;
     --dot: #c9d3d1;
-    --accent: #0b7a6d;
+    --accent: #0a7468;
     --soft: #e0f1ee;
-    --ok: #15803d;
     color-scheme: light;
   }
 }
@@ -75,6 +73,14 @@ body::before {
 }
 a {
   color: inherit;
+}
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  color: var(--fg);
+}
+html {
+  scrollbar-color: color-mix(in srgb, var(--mute) 45%, transparent) var(--bg);
+  accent-color: var(--accent);
 }
 h1,
 h2,
@@ -163,6 +169,9 @@ nav ul {
   flex-wrap: wrap;
   position: relative;
   isolation: isolate;
+}
+nav a:focus-visible {
+  outline-offset: -2px;
 }
 nav a {
   position: relative;
@@ -607,11 +616,6 @@ h1 .w {
   border-radius: 10px;
   border: 1px solid var(--line);
 }
-.grid3 {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
 .certs {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -776,7 +780,6 @@ h1 .w {
   .approach,
   .lead-wrap,
   .grid2,
-  .grid3,
   .skills {
     grid-template-columns: 1fr;
   }
