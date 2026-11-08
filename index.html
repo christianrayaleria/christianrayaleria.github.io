@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Christian Ray Aleria · Computer Engineer</title>
+<meta name="description" content="Christian Ray Aleria, Computer Engineer from Cebu, Philippines. Software, automation, systems and hardware: experience, projects and certifications.">
+<meta name="theme-color" content="#0c0f10">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230c0f10'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='Arial,sans-serif' font-weight='800' font-size='28' fill='%233fc2b2'%3ECA%3C/text%3E%3C/svg%3E">
+<link rel="canonical" href="https://christianrayaleria.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Signal typography on Flow's structure: a one-line name hero, then section titles over card modules. Dark by default, viewer toggle to light. Dot grid behind, lit by the cursor. */
+:root{
+  --bg:#0c0f10; --panel:#121718; --fg:#e9eded; --mute:#919d9d; --line:#222a2b; --dot:#283133; --accent:#3fc2b2; --soft:#11302d; --ok:#4ade80;
+  --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --f-body:"Geist",ui-sans-serif,system-ui,sans-serif;
+  --f-mono:"Geist Mono",ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+:root[data-mode="light"]{
+  --bg:#f6f7f6; --panel:#ffffff; --fg:#121617; --mute:#5c6767; --line:#dfe5e4; --dot:#c9d3d1; --accent:#0b7a6d; --soft:#e0f1ee; --ok:#15803d;
+  color-scheme:light;
+}
+/* no choice saved yet: follow the device setting (applies before the script runs, so no flash) */
+@media (prefers-color-scheme: light){:root:not([data-mode="dark"]){
+  --bg:#f6f7f6; --panel:#ffffff; --fg:#121617; --mute:#5c6767; --line:#dfe5e4; --dot:#c9d3d1; --accent:#0b7a6d; --soft:#e0f1ee; --ok:#15803d;
+  color-scheme:light;
+}}
+*{box-sizing:border-box}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--fg);font:16px/1.65 var(--f-body);transition:background .4s,color .4s}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* ---------- dot grid: faint everywhere, denser up top, lit near the cursor ---------- */
+.dots,.dots-lit{position:fixed;inset:0;pointer-events:none;z-index:0;background-size:26px 26px;background-position:13px 13px}
+.dots{background-image:radial-gradient(var(--dot) 1.1px,transparent 1.4px);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,rgba(0,0,0,.35) 100%);mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,rgba(0,0,0,.35) 100%)}
+.dots-lit{background-image:radial-gradient(var(--accent) 1.3px,transparent 1.6px);opacity:.55;
+  -webkit-mask-image:radial-gradient(200px circle at var(--mx,75%) var(--my,30%),#000,transparent 75%);mask-image:radial-gradient(200px circle at var(--mx,75%) var(--my,30%),#000,transparent 75%)}
+.page{position:relative;z-index:1}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+nav.scrolled{border-color:var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:14px}
+nav ul{display:flex;gap:4px;font-size:14px;flex-wrap:wrap;position:relative;isolation:isolate}
+nav a{position:relative;display:block;text-decoration:none;padding:7px 11px;border-radius:8px;color:var(--mute);transition:color .25s}
+nav a:hover,nav a.on{color:var(--fg)}
+nav .pill{position:absolute;top:0;left:0;z-index:-1;border-radius:8px;background:var(--panel);border:1px solid var(--line);opacity:0;pointer-events:none;
+  transition:transform .5s cubic-bezier(.2,.9,.25,1.05),width .5s cubic-bezier(.2,.9,.25,1.05),opacity .3s}
+nav .pill::after{content:"";position:absolute;left:50%;bottom:-1px;width:14px;height:2px;margin-left:-7px;border-radius:2px;background:var(--accent)}
+.mode{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--f-mono);color:var(--mute);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:6px 10px 6px 6px;cursor:pointer;transition:color .2s,border-color .2s}
+.mode:hover{color:var(--fg);border-color:var(--accent)}
+.mode .knob{width:22px;height:22px;border-radius:50%;background:var(--soft);color:var(--accent);overflow:hidden}
+.mode .lbl{height:14px;line-height:14px;overflow:hidden;width:5ch}
+.mode .trk{display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.2,.9,.25,1.1)}
+.mode .knob svg{flex:none;width:22px;height:22px;padding:4px}
+.mode .lbl .trk span{display:block;height:14px}
+:root[data-mode="light"] .mode .trk{transform:translateY(-50%)}
+@media (max-width:480px){.mode .lbl{display:none}.mode{padding:6px}}
+
+/* ---------- motion ---------- */
+@keyframes rise{from{opacity:0;transform:translateY(.45em)}}
+@keyframes fade{from{opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@supports (animation-timeline: view()){
+  .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 35%}
+}
+@keyframes rv{from{opacity:0;translate:0 28px}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ---------- hero ---------- */
+.hero{padding-block:80px 56px}
+.eyebrow{font:500 13px/1.4 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin-bottom:18px;animation:fade .8s both}
+h1{font:800 clamp(30px,7.4vw,88px)/1 var(--f-display);letter-spacing:-.045em}
+h1 .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.lede{max-width:42ch;font-size:clamp(18px,2vw,21px);line-height:1.5;margin-top:26px;color:color-mix(in srgb,var(--fg) 86%,var(--bg));animation:rise .9s .4s both}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden}
+.facts div{padding:18px 20px;display:grid;gap:6px}
+.facts div+div{border-left:1px solid var(--line)}
+.facts dt{font:500 11px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute)}
+.facts dd{margin:0;font:600 17px/1.3 var(--f-display)}
+
+/* ---------- sections + cards ---------- */
+.sec{padding-block:80px 0}
+.sechead{display:flex;align-items:baseline;gap:6px 14px;margin-bottom:24px;flex-wrap:wrap}
+.sechead h2{font:700 clamp(28px,3.6vw,38px)/1.1 var(--f-display);letter-spacing:-.025em}
+.sechead span{font:400 13px/1.4 var(--f-mono);color:var(--mute)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:28px;transition:border-color .25s,transform .25s}
+.card:hover{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));transform:translateY(-3px)}
+.when{font:400 13px/1.4 var(--f-mono);color:var(--mute)}
+.org{color:var(--accent);font-weight:500}
+
+.job{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.7fr);gap:32px}
+.job h3{font:600 24px/1.2 var(--f-display);letter-spacing:-.02em}
+.job .org{margin-top:6px}
+.job .when{margin-top:4px}
+.result{display:grid;gap:14px;margin-top:24px;padding-top:20px;border-top:1px dashed var(--line)}
+.result p{display:grid;gap:2px}
+.result b{font:700 30px/1 var(--f-display);letter-spacing:-.03em;color:var(--accent);font-variant-numeric:tabular-nums}
+.result span{font-size:14px;color:var(--mute)}
+.pts{display:grid;gap:10px;color:color-mix(in srgb,var(--fg) 84%,var(--bg))}
+.pts li{padding-left:22px;position:relative}
+.pts li::before{content:"";position:absolute;left:0;top:.78em;width:10px;height:1px;background:var(--accent)}
+
+/* approach */
+.approach{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;padding:40px}
+.approach .lead{display:grid;gap:14px}
+.approach .quote{font:700 clamp(30px,4.2vw,48px)/1.05 var(--f-display);letter-spacing:-.035em}
+.approach .quote em{font-style:normal;color:var(--accent)}
+.approach .body{color:var(--mute);font-size:18px;max-width:34ch}
+.stack{width:100%;max-width:420px;height:auto;justify-self:end}
+.stack text{font:500 14px var(--f-mono);text-anchor:middle;dominant-baseline:middle}
+.stack .ui text{fill:var(--bg)}
+.l-ui{fill:var(--accent);rx:6px;transform-box:fill-box;transform-origin:center;animation:restyle 6s ease-in-out infinite}
+@keyframes restyle{
+  0%,18%{rx:6px;fill:var(--accent);transform:none}
+  25%,43%{rx:28px;fill:var(--fg);transform:translateX(10px)}
+  50%,68%{rx:0px;fill:var(--mute);transform:translateX(-8px) scaleX(.94)}
+  75%,93%{rx:16px;fill:var(--accent);transform:scaleX(1.04)}
+  100%{rx:6px;fill:var(--accent);transform:none}}
+.l-base{fill:var(--soft);stroke:var(--accent);stroke-width:1.5}
+.t-base{fill:var(--fg)}
+.stack .side{font:400 12px var(--f-mono);fill:var(--mute);text-anchor:start}
+.stack .side.strong{fill:var(--accent)}
+.stack .br{fill:none;stroke:var(--accent);stroke-width:1.5}
+
+/* projects */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.proj{display:flex;flex-direction:column;gap:10px}
+.proj .top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.proj h3{font:600 20px/1.25 var(--f-display);letter-spacing:-.015em}
+.proj .r{font:400 12px/1.4 var(--f-mono);color:var(--accent)}
+.proj p{color:var(--mute);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.chips span{font:400 12px/1 var(--f-mono);padding:6px 10px;border-radius:999px;background:var(--soft);color:var(--accent)}
+
+/* education / certs / leadership */
+.edu{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;align-items:start}
+.edu h3{font:600 24px/1.2 var(--f-display);letter-spacing:-.02em}
+.edu .chips{grid-column:1/-1;margin-top:10px}
+.honors{display:flex;gap:8px;flex-wrap:wrap;grid-column:1/-1}
+.honors b{font:600 14px/1 var(--f-display);padding:9px 12px;border-radius:10px;border:1px solid var(--line)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.certs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:860px){.certs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cert{margin:0;padding:10px;display:grid;gap:10px;align-content:start}
+.cert img{display:block;width:100%;max-width:100%;aspect-ratio:10/7;object-fit:contain;background:#fff;border-radius:10px}
+.cert img{border-radius:8px}
+.cert figcaption{padding:0 6px 4px;display:grid;gap:2px}
+.cert h3{font:600 15px/1.3 var(--f-display)}
+.cert .when{font-size:12px}
+.lead-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px}
+.lead-wrap h3{font:600 22px/1.2 var(--f-display)}
+.terms{display:grid;margin-top:16px}
+.terms li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-top:1px dashed var(--line);flex-wrap:wrap}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.skills h3{font:500 12px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute);margin-bottom:14px}
+.skills .chips span{background:transparent;border:1px solid var(--line);color:var(--fg);transition:border-color .2s,color .2s}
+.skills .chips span:hover{border-color:var(--accent);color:var(--accent)}
+
+/* contact: the page's last block */
+.end{padding-block:112px 48px;display:grid;gap:36px}
+.end h2{font:800 clamp(22px,4.3vw,50px)/1.1 var(--f-display);letter-spacing:-.04em}
+.end h2 em{font-style:normal;color:var(--accent)}
+.reach{margin:0;border-bottom:1px solid var(--line)}
+.reach div{display:grid;grid-template-columns:120px minmax(0,1fr);align-items:baseline;gap:16px;padding:14px 4px;border-top:1px solid var(--line)}
+.reach dt{font:500 12px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.1em;color:var(--mute)}
+.reach dd{margin:0;font:500 17px/1.4 var(--f-body);overflow-wrap:anywhere}
+.fine{font:400 13px/1.4 var(--f-mono);color:var(--mute)}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  /* phones + small tablets: links become a swipeable row, highlight still slides */
+  nav ul{flex:1;min-width:0;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;
+    -webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}
+  nav ul::-webkit-scrollbar{display:none}
+  nav li{flex:none}
+  nav a{padding:9px 11px}
+  nav .wrap{gap:10px;padding-block:10px}
+  .hero{padding-block:48px 40px}
+  .facts{grid-template-columns:1fr}
+  .facts div+div{border-left:0;border-top:1px solid var(--line)}
+  .job,.approach,.lead-wrap,.grid2,.grid3,.skills{grid-template-columns:1fr}
+  .approach{padding:28px}
+  .stack{justify-self:start}
+  .reach div{grid-template-columns:1fr;gap:8px}
+  .sec{padding-block:60px 0}
+}
+</style>
+</head>
+<body>
+<div class="dots" aria-hidden="true"></div>
+<div class="dots-lit" aria-hidden="true"></div>
+
+<div class="page">
+<nav id="nav"><div class="wrap">
+  <ul>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="mode" id="mode" type="button" aria-label="Switch to light mode">
+    <span class="knob"><span class="trk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span></span>
+    <span class="lbl" aria-hidden="true"><span class="trk"><span>Dark</span><span>Light</span></span></span>
+  </button>
+</div></nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Computer Engineer · Cebu, Philippines</p>
+      <h1><span class="w" style="animation-delay:.08s">Christian</span> <span class="w" style="animation-delay:.16s">Ray</span> <span class="w" style="animation-delay:.24s">Aleria</span></h1>
+      <p class="lede">I build across software, automation, systems and hardware, and I care most about getting the logic right before anything ships.</p>
+    </div>
+  </header>
+
+  <dl class="facts rv">
+    <div><dt>Degree</dt><dd>Bachelor of Science in Computer Engineering</dd></div>
+    <div><dt>Honors</dt><dd>Cum Laude · 1.55</dd></div>
+    <div><dt>Projects</dt><dd id="projCount">6 shipped</dd></div>
+  </dl>
+
+  <section class="sec" id="experience">
+    <div class="sechead"><h2>Experience</h2></div>
+    <article class="card job rv">
+      <div><h3>Automation Engineer</h3><p class="org">Techflow.ai GmbH</p><p class="when">2026 – Present</p>
+        <div class="result"><p><b>10+</b><span>clients served</span></p><p><b>25–30 hrs</b><span>of manual data entry cut each week</span></p></div></div>
+      <ul class="pts">
+        <li>Design and build client automations in Make.com that connect CRMs, databases and business tools, replacing manual data entry and syncing.</li>
+        <li>Work on a VPS that runs scripts for Make.com scenarios, handling tasks that go beyond what Make can do on its own.</li>
+        <li>Build AI agents and tune each one for its role, refining prompts, tools and MCP integrations until it performs reliably.</li>
+        <li>Troubleshoot workflows through log analysis, fixing failures and removing wasted operations to lower run costs.</li>
+        <li>Design SmartSuite databases that give client teams one reliable source for their data.</li>
+        <li>Run security reviews of client applications and write up the gaps with recommended fixes.</li>
+        <li>Build client dashboards that bring key data into a single view.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="sec" id="approach">
+    <div class="sechead"><h2>Logic first, then design</h2></div>
+    <div class="card approach rv">
+      <div class="lead">
+        <p class="quote">Design shows the work. <em>Logic</em> holds it up.</p>
+        <p class="body">I get the data and the logic right first, so the design has something solid to stand on.</p>
+      </div>
+      <svg class="stack" viewBox="0 0 360 230" role="img" aria-label="Three stacked layers: design on top keeps changing, logic and data underneath stay fixed">
+        <g class="ui"><rect class="l-ui" x="40" y="20" width="200" height="56"/><text x="140" y="49">Design</text></g>
+        <rect class="l-base" x="40" y="88" width="200" height="56" rx="6"/><text class="t-base" x="140" y="117">Logic</text>
+        <rect class="l-base" x="40" y="156" width="200" height="56" rx="6"/><text class="t-base" x="140" y="185">Data</text>
+        <text class="side" x="256" y="52">refine anytime</text>
+        <path class="br" d="M252 92 h8 v116 h-8"/>
+        <text class="side strong" x="268" y="148">get right</text><text class="side strong" x="268" y="164">first</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <div class="sechead"><h2>Projects</h2></div>
+    <div class="grid2" id="projGrid"></div>
+  </section>
+
+  <section class="sec" id="education">
+    <div class="sechead"><h2>Education</h2></div>
+    <article class="card edu rv">
+      <div><h3>Bachelor of Science in Computer Engineering</h3><p class="org">University of San Carlos · School of Engineering</p></div>
+      <p class="when">Graduated July 2026</p>
+      <div class="honors"><b>Cum Laude</b><b>Dean's List</b><b>GWA 1.55</b></div>
+      <div class="chips"><span>Data Structures &amp; Algorithms</span><span>Operating Systems</span><span>Computer Networks &amp; Security</span><span>Web Development</span><span>Embedded Systems</span><span>Software Design &amp; OOP</span></div>
+    </article>
+  </section>
+
+  <section class="sec" id="certifications">
+    <div class="sechead"><h2>Certifications</h2></div>
+    <div class="certs">
+      <figure class="card cert rv"><img src="assets/certs/make-simplified-accelerator.jpg" alt="Make Simplified Accelerator certificate issued to Christian Ray Aleria" width="900" height="630" loading="lazy"><figcaption><h3>Make Simplified Accelerator</h3><p class="when">Make · Feb 6, 2026</p></figcaption></figure>
+      <figure class="card cert rv"><img src="assets/certs/smartsuite-pro.jpg" alt="SmartSuite Pro certificate issued to Christian Ray Aleria" width="900" height="630" loading="lazy"><figcaption><h3>SmartSuite Pro</h3><p class="when">SmartSuite · Feb 25, 2026</p></figcaption></figure>
+      <figure class="card cert rv"><img src="assets/certs/smartsuite-expert.jpg" alt="SmartSuite Expert certificate issued to Christian Ray Aleria" width="900" height="630" loading="lazy"><figcaption><h3>SmartSuite Expert</h3><p class="when">SmartSuite · May 12, 2026</p></figcaption></figure>
+      <figure class="card cert rv"><img src="assets/certs/smartsuite-consultant.jpg" alt="SmartSuite Consultant certificate issued to Christian Ray Aleria" width="900" height="630" loading="lazy"><figcaption><h3>SmartSuite Consultant</h3><p class="when">SmartSuite · May 12, 2026</p></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="sec" id="leadership">
+    <div class="sechead"><h2>Leadership</h2></div>
+    <article class="card lead-wrap rv">
+      <div>
+        <h3>Computer Engineering Council</h3>
+        <ul class="terms">
+          <li><span>VP External</span><span class="when">2024 – 2025</span></li>
+          <li><span>VP Internal</span><span class="when">2023 – 2024</span></li>
+          <li><span>Compelympics Head Manager</span><span class="when">2022 – 2023</span></li>
+        </ul>
+      </div>
+      <ul class="pts">
+        <li>Managed external partnerships and secured sponsorships for all off-campus school activities.</li>
+        <li>Helped the Executive President coordinate strategic meetings and plans for the CpE department and students.</li>
+        <li>Led Compelympics, designing the schedules and organizing all games and logistics.</li>
+      </ul>
+    </article>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="sechead"><h2>Skills</h2></div>
+    <div class="skills" id="skillGrid"></div>
+  </section>
+
+  <section class="end" id="contact">
+    <h2 class="rv">Let's build something <em>that holds up.</em></h2>
+    <dl class="reach rv">
+      <div><dt>Email</dt><dd>christianrayaleria@gmail.com</dd></div>
+      <div><dt>LinkedIn</dt><dd>linkedin.com/in/christianrayaleria</dd></div>
+      <div><dt>GitHub</dt><dd>github.com/christianrayaleria</dd></div>
+    </dl>
+    <p class="fine">© 2026 Christian Ray L. Aleria · Cebu, Philippines</p>
+  </section>
+</main>
+
+</div>
+
+<script>
+// From the CV + public repos at github.com/christianrayaleria
+const projects=[
+  {name:"Crafter's Toolkit",role:"Full-Stack Developer",
+   text:"A web app that runs a print and craft studio: inventory, costing, orders and profit reports.",
+   stack:["JavaScript","Supabase","PostgreSQL","IndexedDB","PWA","Cloudflare Workers"]},
+  {name:"MarchStudioCo Photobooth",role:"Full-Stack Developer & Designer",
+   text:"A browser photobooth. Customers unlock a session with a code, design their photo strip and download it as a PDF, PNG or MP4.",
+   stack:["React","TypeScript","Vite","Supabase","Cloudflare Pages"]},
+  {name:"Cebu City Jail Data Management System",role:"Full-Stack Developer · Thesis",
+   text:"A PERN data system with encrypted CRUD, OCR visitor verification wired to hardware, and Data Privacy Act compliance through RBAC, AES/TLS and LAN-only access.",
+   stack:["PostgreSQL","Express","React","Node.js","OCR"]},
+  {name:"VaultPass",role:"Mobile App Developer",
+   text:"A password manager with AES-256 master-key authentication and a real-time sync layer that keeps data conflict-free across devices.",
+   stack:["Flutter","Dart","AES-256"]},
+  {name:"Hai Hotel",role:"Full-Stack Java Application",
+   text:"Hotel reservations with queue-based conflict resolution, automatic date adjustment against overlaps, and safe concurrent bookings.",
+   stack:["Java","MySQL","JDBC"]},
+  {name:"Automatic Medicine Dispenser",role:"Firmware Developer",
+   text:"Microcontroller firmware that uses timer interrupts to dispense solid and liquid doses for three users, with alerts and live inventory.",
+   stack:["Assembly","Microcontroller","Timer interrupts"]},
+  {name:"BiteBook",role:"Web Developer · CpE 3222 Final Project",
+   text:"A PHP recipe app with user accounts. Save recipes with ingredient amounts, see which dishes you can make from what you have, and share any recipe with a quick copy and paste.",
+   stack:["PHP","Web"]},
+  {name:"USC Marketplace",role:"Java Developer · CPE 2102L Project",
+   text:"A campus marketplace application for the University of San Carlos, built in Java with a MySQL database.",
+   stack:["Java","MySQL","NetBeans"]}
+];
+document.getElementById("projGrid").innerHTML=projects.map(p=>`
+  <article class="card proj rv">
+    <div class="top"><div><h3>${p.name}</h3><p class="r">${p.role}</p></div></div>
+    <p>${p.text}</p>
+    <div class="chips">${p.stack.map(s=>`<span>${s}</span>`).join("")}</div>
+  </article>`).join("");
+document.getElementById("projCount").textContent=`${projects.length} built`;
+
+const skills={
+  "Languages":["C","C#","Java","Python","PHP","JavaScript","TypeScript","Assembly"],
+  "Web development":["HTML5","CSS3","Tailwind CSS","React","Vite","Node.js","Express","Axios","PWA / Service Workers","Chart.js"],
+  "Data & automation":["PostgreSQL","Supabase","Firebase","Airtable","SmartSuite","Make.com","n8n"],
+  "Tools":["Git","VS Code","Flutter","Cloudflare Workers & Pages","NetBeans","Proteus","Claude","Lovable"]
+};
+document.getElementById("skillGrid").innerHTML=Object.entries(skills).map(([k,v])=>`<div class="card rv"><h3>${k}</h3><div class="chips">${v.map(s=>`<span>${s}</span>`).join("")}</div></div>`).join("")
+  +`<div class="card rv" style="grid-column:1/-1"><h3>Core</h3><div class="chips">${["Analytical thinking","Adaptability","Organized leadership","Resourcefulness","Communication"].map(s=>`<span>${s}</span>`).join("")}</div></div>`;
+
+// light / dark toggle (dark by default; remembered per viewer when storage works)
+const root=document.documentElement, modeBtn=document.getElementById("mode");
+function setMode(m){
+  root.setAttribute("data-mode", m);
+  modeBtn.setAttribute("aria-label", m==="light"?"Switch to dark mode":"Switch to light mode");
+}
+// default = the visitor's device setting; a click overrides it and is remembered
+const sys=matchMedia("(prefers-color-scheme: light)");
+let saved=null; try{saved=localStorage.getItem("mode")}catch(e){}
+setMode(saved || (sys.matches?"light":"dark"));
+sys.addEventListener("change",e=>{ if(!saved) setMode(e.matches?"light":"dark") });
+modeBtn.onclick=()=>{const m=root.getAttribute("data-mode")==="light"?"dark":"light"; saved=m; setMode(m); try{localStorage.setItem("mode",m)}catch(e){}};
+
+// cursor-lit dots
+addEventListener("pointermove",e=>{root.style.setProperty("--mx",e.clientX+"px");root.style.setProperty("--my",e.clientY+"px")},{passive:true});
+
+// nav border on scroll + active link
+const nav=document.getElementById("nav"), links=[...nav.querySelectorAll("a")];
+addEventListener("scroll",()=>nav.classList.toggle("scrolled",scrollY>8),{passive:true});
+// one highlight that slides to the active link
+const pill=document.createElement("li"); pill.className="pill"; pill.setAttribute("aria-hidden","true"); nav.querySelector("ul").prepend(pill);
+let active=null, lockUntil=0;
+function place(){ if(!active){pill.style.opacity=0;return}
+  pill.style.width=active.offsetWidth+"px"; pill.style.height=active.offsetHeight+"px";
+  pill.style.transform=`translate(${active.offsetLeft}px,${active.offsetTop}px)`; pill.style.opacity=1; }
+function setActive(a){ if(!a||a===active) return; links.forEach(l=>l.classList.toggle("on",l===a)); active=a; place();
+  const ul=pill.parentElement; // on phones the row scrolls sideways: keep the active link in view
+  if(ul.scrollWidth>ul.clientWidth) ul.scrollTo({left:a.offsetLeft-(ul.clientWidth-a.offsetWidth)/2,behavior:"smooth"}); }
+links.forEach(a=>a.addEventListener("click",()=>{setActive(a); lockUntil=Date.now()+1000}));
+addEventListener("resize",place);
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting||Date.now()<lockUntil) return;
+  setActive(links.find(a=>a.getAttribute("href")==="#"+e.target.id)); }),{rootMargin:"-45% 0px -50% 0px"});
+document.querySelectorAll("section[id]").forEach(s=>io.observe(s));
+
+
+</script>
+</body>
+</html>
