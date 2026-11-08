@@ -59,7 +59,6 @@ document.getElementById("projGrid").innerHTML = projects
   </article>`,
   )
   .join("");
-document.getElementById("projCount").textContent = `${projects.length} built`;
 
 const skills = {
   Languages: ["C", "C#", "Java", "Python", "PHP", "JavaScript", "TypeScript", "Assembly"],
