@@ -554,32 +554,65 @@ h1 .w {
   stroke-width: 1.5;
 }
 
-/* projects */
-.grid2 {
+/* projects: screenshots for the featured ones, a ruled list for the rest */
+.feat {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 40px 32px;
 }
-.proj {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.proj-feat img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
-.proj .top {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: flex-start;
+.proj-feat:hover img {
+  transform: translateY(-4px);
 }
-.proj h3 {
-  font: 600 20px/1.25 var(--f-display);
+.proj-feat h3,
+.plist h3 {
+  font: 600 22px/1.25 var(--f-display);
   letter-spacing: -0.015em;
 }
-.proj .r {
-  font: 400 12px/1.4 var(--f-mono);
+.proj-feat .r,
+.plist .r {
+  margin-top: 2px;
+  font-size: 14px;
   color: var(--accent);
 }
-.proj p {
+.proj-feat p:not(.r) {
+  margin-top: 10px;
+  color: var(--mute);
+  font-size: 15px;
+  max-width: 60ch;
+}
+.proj-feat .stk,
+.plist .stk {
+  color: var(--fg);
+  font-size: 14px;
+}
+.plist {
+  list-style: none;
+  margin: 56px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+.plist li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr) minmax(0, 0.8fr);
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.plist h3 {
+  font-size: 18px;
+}
+.plist p:not(.r) {
   color: var(--mute);
   font-size: 15px;
 }
@@ -687,30 +720,25 @@ h1 .w {
   flex-wrap: wrap;
 }
 
-/* skills */
-.skills {
+/* tools / skills: a plain two-column index */
+.index {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+.index div {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: 32px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
 }
-.skills h3 {
-  font: 500 12px/1 var(--f-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+.index dt {
   color: var(--mute);
-  margin-bottom: 14px;
+  font-size: 15px;
 }
-.skills .chips span {
-  background: transparent;
-  border: 1px solid var(--line);
-  color: var(--fg);
-  transition:
-    border-color 0.2s,
-    color 0.2s;
-}
-.skills .chips span:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+.index dd {
+  margin: 0;
+  font-size: 16px;
 }
 
 /* contact: the page's last block */
@@ -791,9 +819,14 @@ h1 .w {
   .job,
   .approach,
   .lead-wrap,
-  .grid2,
-  .skills {
-    grid-template-columns: 1fr;
+  .feat,
+  .plist li,
+  .index div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .plist li,
+  .index div {
+    gap: 6px;
   }
   .approach {
     padding: 28px;

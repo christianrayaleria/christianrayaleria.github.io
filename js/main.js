@@ -1,7 +1,10 @@
-// Projects: add, remove or edit an entry here and the cards update on their own.
+// Projects: add, remove or edit an entry here and the page updates on its own.
+// Entries with an `img` are shown large with their screenshot; the rest go in the list below them.
 const projects = [
   {
     name: "Crafter's Toolkit",
+    img: "assets/projects/crafters-toolkit.jpg",
+    alt: "Crafter's Toolkit sign-in page, with an illustration of order, stock and profit cards",
     role: "Full-Stack Developer",
     text: "A web app that runs a print and craft studio: inventory, costing, orders and profit reports.",
     stack: ["JavaScript", "Supabase", "PostgreSQL", "IndexedDB", "PWA", "Cloudflare Workers"],
@@ -14,6 +17,8 @@ const projects = [
   },
   {
     name: "Cebu City Jail Data Management System",
+    img: "assets/projects/cebu-city-jail-dms.jpg",
+    alt: "Cebu City Jail - Annex Data Management System login page",
     role: "Full-Stack Developer · Thesis",
     text: "A PERN data system with encrypted CRUD, OCR visitor verification wired to hardware, and Data Privacy Act compliance through RBAC, AES/TLS and LAN-only access.",
     stack: ["PostgreSQL", "Express", "React", "Node.js", "OCR"],
@@ -49,18 +54,33 @@ const projects = [
     stack: ["Java", "MySQL", "NetBeans"],
   },
 ];
-document.getElementById("projGrid").innerHTML = projects
-  .map(
-    (p) => `
-  <article class="card proj rv">
-    <div class="top"><div><h3>${p.name}</h3><p class="r">${p.role}</p></div></div>
+document.getElementById("projGrid").innerHTML =
+  `<div class="feat">${projects
+    .filter((p) => p.img)
+    .map(
+      (p) => `
+  <article class="proj-feat rv">
+    <img src="${p.img}" alt="${p.alt}" width="1600" height="1000" loading="lazy" />
+    <h3>${p.name}</h3>
+    <p class="r">${p.role}</p>
     <p>${p.text}</p>
-    <div class="chips">${p.stack.map((s) => `<span>${s}</span>`).join("")}</div>
+    <p class="stk">${p.stack.join(", ")}</p>
   </article>`,
-  )
-  .join("");
+    )
+    .join("")}</div>` +
+  `<ul class="plist">${projects
+    .filter((p) => !p.img)
+    .map(
+      (p) => `
+  <li class="rv">
+    <div><h3>${p.name}</h3><p class="r">${p.role}</p></div>
+    <p>${p.text}</p>
+    <p class="stk">${p.stack.join(", ")}</p>
+  </li>`,
+    )
+    .join("")}</ul>`;
 
-// Tools and skills: each key is a card, each list is its chips.
+// Tools and skills: each key is a row label, each list its comma-separated items.
 const tools = {
   Development: ["VS Code", "Git", "NetBeans", "Flutter", "Claude", "Lovable"],
   "Servers & deployment": ["MobaXterm", "Cloudflare Workers & Pages"],
@@ -85,15 +105,12 @@ const skills = {
   "Spoken languages": ["English", "Tagalog", "Bisaya"],
   Core: ["Analytical thinking", "Adaptability", "Organized leadership", "Resourcefulness", "Communication"],
 };
-const cards = (groups) =>
+const rows = (groups) =>
   Object.entries(groups)
-    .map(
-      ([k, v]) =>
-        `<div class="card rv"><h3>${k}</h3><div class="chips">${v.map((s) => `<span>${s}</span>`).join("")}</div></div>`,
-    )
+    .map(([k, v]) => `<div class="rv"><dt>${k}</dt><dd>${v.join(", ")}</dd></div>`)
     .join("");
-document.getElementById("toolGrid").innerHTML = cards(tools);
-document.getElementById("skillGrid").innerHTML = cards(skills);
+document.getElementById("toolGrid").innerHTML = rows(tools);
+document.getElementById("skillGrid").innerHTML = rows(skills);
 
 // light / dark toggle (starts from the device setting; a click is remembered per viewer)
 const root = document.documentElement,
