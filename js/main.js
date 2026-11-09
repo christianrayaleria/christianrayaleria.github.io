@@ -60,9 +60,16 @@ document.getElementById("projGrid").innerHTML = projects
   )
   .join("");
 
+// Tools and skills: each key is a card, each list is its chips.
+const tools = {
+  Development: ["VS Code", "Git", "NetBeans", "Flutter", "Claude", "Lovable"],
+  "Servers & deployment": ["MobaXterm", "Cloudflare Workers & Pages"],
+  "Automation & data platforms": ["Make.com", "n8n", "Airtable", "SmartSuite", "Supabase", "Firebase"],
+  Hardware: ["Proteus", "EMU8086", "Quartus"],
+};
 const skills = {
-  Languages: ["C", "C#", "Java", "Python", "PHP", "JavaScript", "TypeScript", "Assembly"],
-  "Web development": [
+  "Programming languages": ["C", "C#", "Java", "Python", "PHP", "JavaScript", "TypeScript", "Assembly", "HDL"],
+  "Web & backend": [
     "HTML5",
     "CSS3",
     "Tailwind CSS",
@@ -73,36 +80,20 @@ const skills = {
     "Axios",
     "PWA / Service Workers",
     "Chart.js",
-  ],
-  "Data & automation": [
     "PostgreSQL",
-    "Supabase",
-    "Firebase",
-    "Airtable",
-    "SmartSuite",
-    "Make.com",
-    "n8n",
   ],
-  Tools: [
-    "Git",
-    "VS Code",
-    "MobaXterm",
-    "Flutter",
-    "Cloudflare Workers & Pages",
-    "NetBeans",
-    "Proteus",
-    "Claude",
-    "Lovable",
-  ],
+  "Spoken languages": ["English", "Tagalog", "Bisaya"],
+  Core: ["Analytical thinking", "Adaptability", "Organized leadership", "Resourcefulness", "Communication"],
 };
-document.getElementById("skillGrid").innerHTML =
-  Object.entries(skills)
+const cards = (groups) =>
+  Object.entries(groups)
     .map(
       ([k, v]) =>
         `<div class="card rv"><h3>${k}</h3><div class="chips">${v.map((s) => `<span>${s}</span>`).join("")}</div></div>`,
     )
-    .join("") +
-  `<div class="card rv" style="grid-column:1/-1"><h3>Core</h3><div class="chips">${["Analytical thinking", "Adaptability", "Organized leadership", "Resourcefulness", "Communication"].map((s) => `<span>${s}</span>`).join("")}</div></div>`;
+    .join("");
+document.getElementById("toolGrid").innerHTML = cards(tools);
+document.getElementById("skillGrid").innerHTML = cards(skills);
 
 // light / dark toggle (starts from the device setting; a click is remembered per viewer)
 const root = document.documentElement,
