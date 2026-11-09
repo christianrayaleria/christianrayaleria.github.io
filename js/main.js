@@ -86,6 +86,7 @@ const skills = {
   Tools: [
     "Git",
     "VS Code",
+    "MobaXterm",
     "Flutter",
     "Cloudflare Workers & Pages",
     "NetBeans",
