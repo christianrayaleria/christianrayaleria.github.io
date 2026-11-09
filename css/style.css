@@ -302,6 +302,12 @@ nav .pill::after {
     translate: 0 28px;
   }
 }
+/* theme switch: the new mode grows out of the toggle as a circle (driven from main.js) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -126,10 +126,35 @@ sys.addEventListener("change", (e) => {
 modeBtn.onclick = () => {
   const m = root.getAttribute("data-mode") === "light" ? "dark" : "light";
   saved = m;
-  setMode(m);
   try {
     localStorage.setItem("mode", m);
   } catch (e) {}
+  // no View Transitions support or reduced motion: switch instantly
+  if (!document.startViewTransition || matchMedia("(prefers-reduced-motion: reduce)").matches)
+    return setMode(m);
+  // the new mode spills out of the toggle as a wobbly liquid blob that settles as it covers the screen
+  const r = modeBtn.getBoundingClientRect(),
+    x = r.left + r.width / 2,
+    y = r.top + r.height / 2,
+    end = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) * 1.06,
+    N = 48, // points around the blob edge
+    F = 16, // keyframes
+    frames = [];
+  for (let f = 0; f <= F; f++) {
+    const t = f / F,
+      rad = end * (1 - (1 - t) ** 3), // fast start, soft landing
+      amp = 0.16 * (1 - t) ** 1.4; // wobble fades out so it ends as a clean edge
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const a = (i / N) * Math.PI * 2,
+        k = 1 + amp * (0.6 * Math.sin(3 * a + t * 7) + 0.4 * Math.sin(5 * a - t * 11));
+      pts.push(`${(x + Math.cos(a) * rad * k).toFixed(1)}px ${(y + Math.sin(a) * rad * k).toFixed(1)}px`);
+    }
+    frames.push({ clipPath: `polygon(${pts.join(",")})` });
+  }
+  document.startViewTransition(() => setMode(m)).ready.then(() =>
+    root.animate(frames, { duration: 520, easing: "linear", pseudoElement: "::view-transition-new(root)" }),
+  );
 };
 
 // cursor-lit dots
