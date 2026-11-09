@@ -164,8 +164,8 @@ nav .wrap {
 }
 nav ul {
   display: flex;
-  gap: 4px;
-  font-size: 14px;
+  gap: 2px;
+  font-size: 13.5px;
   flex-wrap: wrap;
   position: relative;
   isolation: isolate;
@@ -177,7 +177,7 @@ nav a {
   position: relative;
   display: block;
   text-decoration: none;
-  padding: 7px 11px;
+  padding: 6px 9px;
   border-radius: 8px;
   color: var(--mute);
   transition: color 0.25s;
@@ -803,7 +803,7 @@ h1 .w {
     flex: none;
   }
   nav a {
-    padding: 9px 11px;
+    padding: 9px 9px;
   }
   nav .wrap {
     gap: 10px;
