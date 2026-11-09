@@ -755,27 +755,46 @@ h1 .w {
   font-style: normal;
   color: var(--accent);
 }
+/* contact: three cards, brand logo centred above the label and address */
 .reach {
   margin: 0;
-  border-bottom: 1px solid var(--line);
-}
-.reach div {
   display: grid;
-  grid-template-columns: 120px minmax(0, 1fr);
-  align-items: baseline;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  padding: 14px 4px;
-  border-top: 1px solid var(--line);
+}
+.reach-card {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 6px;
+  padding: 32px 20px 28px;
+}
+.reach .logo {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+  fill: var(--fg);
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.25, 1.2);
+}
+.reach-card:hover .logo {
+  transform: translateY(-3px) scale(1.06);
+}
+.logo-gmail {
+  fill: #ea4335 !important;
+}
+.logo-linkedin {
+  fill: #0a66c2 !important;
+}
+:root:not([data-mode="light"]) .logo-linkedin {
+  fill: #2d8ce6 !important; /* LinkedIn blue, lifted so it reads on the dark card */
 }
 .reach dt {
-  font: 500 12px/1 var(--f-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  font-size: 14px;
   color: var(--mute);
 }
 .reach dd {
   margin: 0;
-  font: 500 17px/1.4 var(--f-body);
+  font: 500 16px/1.4 var(--f-body);
   overflow-wrap: anywhere;
 }
 .fine {
@@ -834,9 +853,8 @@ h1 .w {
   .stack {
     justify-self: start;
   }
-  .reach div {
-    grid-template-columns: 1fr;
-    gap: 8px;
+  .reach {
+    grid-template-columns: minmax(0, 1fr);
   }
   .sec {
     padding-block: 60px 0;
