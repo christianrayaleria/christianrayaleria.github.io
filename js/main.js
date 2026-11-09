@@ -45,7 +45,7 @@ const projects = [
     name: "BiteBook",
     role: "Web Developer · CpE 3222 Final Project",
     text: "A PHP recipe app with user accounts. Save recipes with ingredient amounts, see which dishes you can make from what you have, and share any recipe with a quick copy and paste.",
-    stack: ["PHP", "Web"],
+    stack: ["PHP", "MySQL", "phpMyAdmin"],
   },
   {
     name: "USC Marketplace",
