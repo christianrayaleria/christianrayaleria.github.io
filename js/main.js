@@ -64,7 +64,7 @@ document.getElementById("projGrid").innerHTML = projects
 const tools = {
   Development: ["VS Code", "Git", "NetBeans", "Flutter", "Claude", "Lovable"],
   "Servers & deployment": ["MobaXterm", "Cloudflare Workers & Pages"],
-  "Automation & data platforms": ["Make.com", "n8n", "Airtable", "SmartSuite", "Supabase", "Firebase"],
+  "Automation & data platforms": ["Make.com", "n8n", "Airtable", "SmartSuite", "Salesforce CRM", "Supabase", "Firebase"],
   Hardware: ["Proteus", "EMU8086", "Quartus"],
 };
 const skills = {
