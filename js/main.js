@@ -2,9 +2,15 @@
 // Entries with an `img` are shown large with their screenshot; the rest go in the list below them.
 const projects = [
   {
+    name: "Automatic Medicine Dispenser",
+    img: "assets/projects/medicine-dispenser.jpg",
+    alt: "Proteus schematic of the Automatic Medicine Dispenser: LCD, keypad, level display, buzzer, three dispensers, a 555 timer and an 8259 interrupt controller",
+    role: "Team Lead & Firmware Developer",
+    text: "An 8086 dispenser that gives tablets, capsules and syrup on schedule for three users. Each user sets a PIN, dosage and time on the keypad; a 555 timer and 8259 interrupts trigger the alarm and dispense, and a level display flags refills.",
+    stack: ["8086 Assembly", "Proteus", "8259 PIC", "8255 PPI", "555 timer"],
+  },
+  {
     name: "Crafter's Toolkit",
-    img: "assets/projects/crafters-toolkit.jpg",
-    alt: "Crafter's Toolkit sign-in page, with an illustration of order, stock and profit cards",
     role: "Full-Stack Developer",
     text: "A web app that runs a print and craft studio: inventory, costing, orders and profit reports.",
     stack: ["JavaScript", "Supabase", "PostgreSQL", "IndexedDB", "PWA", "Cloudflare Workers"],
@@ -34,12 +40,6 @@ const projects = [
     role: "Full-Stack Java Application",
     text: "Hotel reservations with queue-based conflict resolution, automatic date adjustment against overlaps, and safe concurrent bookings.",
     stack: ["Java", "MySQL", "JDBC"],
-  },
-  {
-    name: "Automatic Medicine Dispenser",
-    role: "Firmware Developer",
-    text: "Microcontroller firmware that uses timer interrupts to dispense solid and liquid doses for three users, with alerts and live inventory.",
-    stack: ["Assembly", "Microcontroller", "Timer interrupts"],
   },
   {
     name: "BiteBook",
